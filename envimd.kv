@@ -1,0 +1,1435 @@
+Interface:
+    Screen:
+        name: 'screen_welcome'
+        MDBoxLayout:
+            orientation: 'vertical'
+            MDLabel:
+                text: 'EnviFHSIS v1.0'
+                size_hint: 1, .1
+                halign: 'center'
+                color: 1, 1, 1, 1
+                canvas.before:
+                    Color:
+                        rgba: 0/255, 119/255, 182/255, 1
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+            MDAnchorLayout:
+                size_hint: 1, .8
+                padding: dp(0), dp(0), dp(0), dp(40)
+                spacing: dp(10)
+                anchor_y: 'bottom'
+                #canvas.before:
+                #    Color:
+                #        rgba: .8, .8, .8, 1
+                #    Rectangle:
+                #        size: self.size
+                #        pos: self.pos
+                MDBoxLayout:
+                    spacing: dp(10)
+                    size_hint: .7, .38
+                    orientation: 'vertical'
+
+                    Spinner:
+                        id: spinner_user
+                        size_hint: 1    , None
+                        height: dp(40)
+                        sync_height: True
+                        text: 'Select user'
+                        background_normal: ''
+                        background_color: 33/255, 150/255, 243/155, 1
+                        values: root.user_name_list
+                        on_text: root.change_user()
+
+                    MDTextField:
+                        id: pw
+                        hint_text: 'Enter password'
+                        password: True
+                        halign: 'center'
+                        multiline: False
+                    MDRaisedButton:
+                        text: 'Login'
+                        size_hint_x: 1
+                        on_release: root.login()
+                    MDRaisedButton:
+                        size_hint_x: 1
+                        text: 'Create new user'
+                        on_release: root.create_user()
+            MDLabel:
+                size_hint: 1, .1
+                text: 'developed by rtaldave@yahoo.com'
+                halign: 'center'
+                color: 1, 1, 1, 1
+                canvas.before:
+                    Color:
+                        rgba: 0/255, 119/255, 182/255, 1
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+    Screen:
+        name: 'screen_new_user'
+        MDBoxLayout:
+            orientation: 'vertical'
+            MDLabel:
+                text: 'Create New User'
+                size_hint: 1, .1
+                halign: 'center'
+                color: 1, 1, 1, 1
+                canvas.before:
+                    Color:
+                        rgba: 0/255, 119/255, 182/255, 1
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+            MDScrollView:
+                size_hint: 1, .8
+                MDGridLayout:
+                    size_hint: 1, None
+                    height: self.minimum_height
+                    cols: 1
+                    padding: dp(20), dp(5), dp(20), dp(5)
+                    Spinner:
+                        id: user_barangay
+                        size_hint: 1, None
+                        height: dp(30)
+                        sync_height: True
+                        text: 'Select barangay (required)'
+                        background_normal: ''
+                        background_color: 33/255, 150/255, 243/155, 1
+                        values: root.barangay_list
+                    MDTextField:
+                        id: user_prefix
+                        hint_text: 'Enter prefix name (i.e. Maria, Ma.)'
+                        multiline: False
+                        write_tab: False
+                    MDTextField:
+                        id: user_first
+                        hint_text: 'Enter first name (required)'
+                        multiline: False
+                        write_tab: False
+                    MDTextField:
+                        id: user_middle
+                        hint_text: 'Enter middle name'
+                        multiline: False
+                        write_tab: False
+                    MDTextField:
+                        id: user_last
+                        hint_text: 'Enter last name  (required)'
+                        multiline: False
+                        write_tab: False
+                    MDTextField:
+                        id: user_suffix
+                        hint_text: 'Enter suffix name (i.e. Jr., Jra., Sr.)'
+                        multiline: False
+                        write_tab: False
+                    MDTextField:
+                        id: user_pw_entry
+                        hint_text: 'Enter password (required)'
+                        multiline: False
+                        password: True
+                        write_tab: False
+                    MDTextField:
+                        id: user_pw_confirm
+                        hint_text: 'Confirm password (required)'
+                        multiline: False
+                        password: True
+                        write_tab: False
+
+            MDBoxLayout:
+                padding: dp(20), dp(0), dp(20), dp(20),
+                spacing: dp(10)
+                size_hint: 1, .1
+                MDRaisedButton:
+                    size_hint: .5, 1
+                    text: 'Cancel'
+                    on_release: root.screen_new_user_cancel()
+                MDRaisedButton:
+                    size_hint: .5, 1
+                    text: 'Save User'
+                    on_release: root.create_user_save()
+    Screen:
+        name: 'screen_main'
+        MDBoxLayout:
+            orientation: 'vertical'
+            MDLabel:
+                text: 'Household List'
+                size_hint: 1, .1
+                halign: 'center'
+                color: 1, 1, 1, 1
+                canvas.before:
+                    Color:
+                        rgba: 0/255, 119/255, 182/255, 1
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+            ScrollView:
+                size_hint: 1, .80
+                bar_width: 5
+                MDGridLayout:
+                    size_hint: 1, None
+                    height: self.minimum_height
+                    cols: 1
+                    padding: dp(20)
+                    spacing: dp(5)
+                    id: box
+
+            MDBoxLayout:
+                padding: dp(10), dp(0), dp(10), dp(10),
+                spacing: dp(10)
+                size_hint: 1, .1
+                canvas.before:
+                    Color:
+                        rgba: 0/255, 119/255, 182/255, 1
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+                MDIconButton:
+                    size_hint: .5, 1
+                    icon: 'arrow-left-bold'
+                    theme_icon_color: 'Custom'
+                    icon_color: 1, 1, 1, 1
+                    on_release: root.screen_main_back()
+                MDIconButton:
+                    size_hint: .5, 1
+                    icon: 'home-plus'
+                    theme_icon_color: 'Custom'
+                    icon_color: 1, 1, 1, 1
+                    on_release: root.add_household()
+                MDIconButton:
+                    size_hint: .5, 1
+                    icon: 'home-edit'
+                    theme_icon_color: 'Custom'
+                    icon_color: 1, 1, 1, 1
+                MDIconButton:
+                    size_hint: .5, 1
+                    icon: 'delete'
+                    theme_icon_color: 'Custom'
+                    icon_color: 1, 1, 1, 1
+    Screen:
+        name: 'frame_01'
+        MDBoxLayout:
+            orientation: 'vertical'
+            MDLabel:
+                text: 'Household Head Info'
+                size_hint: 1, .1
+                halign: 'center'
+                color: 1, 1, 1, 1
+                canvas.before:
+                    Color:
+                        rgba: 0/255, 119/255, 182/255, 1
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+
+            MDGridLayout:
+                padding: dp(40)
+                size_hint: 1, .8
+                cols: 1
+                MDTextField:
+                    id: household_purok
+                    hint_text: 'Enter purok (required):'
+                    multiline: False
+                    write_tab: False
+                MDTextField:
+                    id: household_prefix
+                    hint_text: 'Enter prefix name (i.e. Maria, Ma.):'
+                    multiline: False
+                    write_tab: False
+                MDTextField:
+                    id: household_first
+                    hint_text: 'Enter first name (required):'
+                    multiline: False
+                    write_tab: False
+                MDTextField:
+                    id: household_middle
+                    hint_text: 'Enter middle name:'
+                    multiline: False
+                    write_tab: False
+                MDTextField:
+                    id: household_last
+                    hint_text: 'Enter last name (required):'
+                    multiline: False
+                    write_tab: False
+                MDTextField:
+                    id: household_suffix
+                    hint_text: 'Enter suffix name (i.e. Jr., Jra, Sr.):'
+                    multiline: False
+                    write_tab: False
+            MDBoxLayout:
+                padding: dp(10), dp(0), dp(10), dp(10),
+                spacing: dp(10)
+                size_hint: 1, .1
+                canvas.before:
+                    Color:
+                        rgba: 0/255, 119/255, 182/255, 1
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+                MDIconButton:
+                    size_hint: .5, 1
+                    icon: 'cancel'
+                    theme_icon_color: 'Custom'
+                    icon_color: 1, 1, 1, 1
+                    on_release: root.household_cancel()
+                MDIconButton:
+                    size_hint: .5, 1
+                    icon: 'arrow-right-bold'
+                    theme_icon_color: 'Custom'
+                    icon_color: 1, 1, 1, 1
+                    on_release: root.frame_01_next()
+
+    Screen:
+        name: 'frame_02'
+        MDBoxLayout:
+            orientation: 'vertical'
+            MDLabel:
+                text: 'Water Source'
+                size_hint: 1, .1
+                halign: 'center'
+                color: 1, 1, 1, 1
+                canvas.before:
+                    Color:
+                        rgba: 0/255, 119/255, 182/255, 1
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+            MDAnchorLayout:
+                size_hint: 1, .8
+                MDGridLayout:
+                    cols: 1
+                    size_hint: .8, .85
+                    spacing: dp(20)
+                    MDLabel:
+                        markup: True
+                        text: '[b]Level of water source (required)[/b]'
+                        halign: 'center'
+                        size_hint: 1, None
+                        height: dp(40)
+                    MDBoxLayout:
+                        size_hint: 1, None
+                        height: dp(40)
+                        MDCheckbox:
+                            id: level_1
+                            size_hint: None, 1
+                            width: self.height
+                            group: 'water_level'
+                        MDLabel:
+                            text: 'Level 1 (point source i.e. deep well, hand pump, spring)'
+                    MDBoxLayout:
+                        size_hint: 1, None
+                        height: dp(40)
+                        MDCheckbox:
+                            id: level_2
+                            size_hint: None, 1
+                            width: self.height
+                            group: 'water_level'
+                        MDLabel:
+                            text: 'Level 2 (i.e communal faucet, barangay faucet)'
+                    MDBoxLayout:
+                        size_hint: 1, None
+                        height: dp(40)
+                        MDCheckbox:
+                            id: level_3
+                            size_hint: None, 1
+                            width: self.height
+                            group: 'water_level'
+                        MDLabel:
+                            text: 'Level 3 (individual connection)'
+                    MDBoxLayout:
+                        size_hint: 1, None
+                        height: dp(40)
+                        MDCheckbox:
+                            id: other_water
+                            size_hint: None, 1
+                            width: self.height
+                            group: 'water_level'
+                            on_active: root.other_water()
+                        MDLabel:
+                            text: 'Others (doubtful source i.e. river, rain water)'
+                    MDTextField:
+                        id: other_water_description
+                        hint_text: ''
+                        write_tab : False
+                        multiline: False
+                        disabled: True
+
+
+            MDBoxLayout:
+                padding: dp(10), dp(0), dp(10), dp(10),
+                spacing: dp(10)
+                size_hint: 1, .1
+                canvas.before:
+                    Color:
+                        rgba: 0/255, 119/255, 182/255, 1
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+                MDIconButton:
+                    size_hint: .5, 1
+                    icon: 'arrow-left-bold'
+                    theme_icon_color: 'Custom'
+                    icon_color: 1, 1, 1, 1
+                    on_release: root.frame_02_previous()
+                MDIconButton:
+                    size_hint: .5, 1
+                    icon: 'cancel'
+                    theme_icon_color: 'Custom'
+                    icon_color: 1, 1, 1, 1
+                    on_release: root.household_cancel()
+                MDIconButton:
+                    size_hint: .5, 1
+                    icon: 'arrow-right-bold'
+                    theme_icon_color: 'Custom'
+                    icon_color: 1, 1, 1, 1
+                    on_release: root.frame_02_next()
+
+    Screen:
+        name: 'frame_03'
+        MDBoxLayout:
+            orientation: 'vertical'
+            MDLabel:
+                text: 'Water Source'
+                size_hint: 1, .1
+                halign: 'center'
+                color: 1, 1, 1, 1
+                canvas.before:
+                    Color:
+                        rgba: 0/255, 119/255, 182/255, 1
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+            MDAnchorLayout:
+                size_hint: 1, .8
+                MDGridLayout:
+                    cols: 1
+                    size_hint: .8, .9
+                    MDGridLayout:
+                        cols: 1
+                        spacing: dp(10)
+                        MDLabel:
+                            markup: True
+                            text: '[b]Location of water source (required)[/b]'
+                            halign: 'center'
+                            size_hint: 1, None
+                            height: dp(40)
+                        MDLabel:
+                            text: 'Is water source located within the premises of the household?'
+                            size_hint: 1, None
+                            height: dp(40)
+                        Spinner:
+                            id: water_location
+                            size_hint: 1, None
+                            height: dp(40)
+                            sync_height: True
+                            text: 'Yes/No'
+                            background_normal: ''
+                            background_color: 33/255, 150/255, 243/155, 1
+                            values: ['Yes', 'No']
+                    MDGridLayout:
+                        cols: 1
+                        spacing: dp(10)
+                        MDLabel:
+                            markup: True
+                            text: '[b]Availability of water source (required)[/b]'
+                            halign: 'center'
+                            size_hint: 1, None
+                            height: dp(40)
+                        MDLabel:
+                            text: 'Is water available at least 12 hours a day?'
+                            size_hint: 1, None
+                            height: dp(40)
+                        Spinner:
+                            id: water_availability
+                            size_hint: 1, None
+                            height: dp(40)
+                            sync_height: True
+                            text: 'Yes/No'
+                            background_normal: ''
+                            background_color: 33/255, 150/255, 243/155, 1
+                            values: ['Yes', 'No']
+            MDBoxLayout:
+                padding: dp(10), dp(0), dp(10), dp(10),
+                spacing: dp(10)
+                size_hint: 1, .1
+                canvas.before:
+                    Color:
+                        rgba: 0/255, 119/255, 182/255, 1
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+                MDIconButton:
+                    size_hint: .5, 1
+                    icon: 'arrow-left-bold'
+                    theme_icon_color: 'Custom'
+                    icon_color: 1, 1, 1, 1
+                    on_release: root.frame_03_previous()
+                MDIconButton:
+                    size_hint: .5, 1
+                    icon: 'cancel'
+                    theme_icon_color: 'Custom'
+                    icon_color: 1, 1, 1, 1
+                    on_release: root.household_cancel()
+                MDIconButton:
+                    size_hint: .5, 1
+                    icon: 'arrow-right-bold'
+                    theme_icon_color: 'Custom'
+                    icon_color: 1, 1, 1, 1
+                    on_release: root.frame_03_next()
+
+    Screen:
+        name: 'frame_04'
+        MDBoxLayout:
+            orientation: 'vertical'
+            MDLabel:
+                text: 'Water Source'
+                size_hint: 1, .1
+                halign: 'center'
+                color: 1, 1, 1, 1
+                canvas.before:
+                    Color:
+                        rgba: 0/255, 119/255, 182/255, 1
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+            MDAnchorLayout:
+                size_hint: 1, .8
+                MDGridLayout:
+                    cols: 1
+                    size_hint: .8, .9
+                    spacing: dp(20)
+                    MDLabel:
+                        markup: True
+                        text: '[b]Microbiological Validation (required)[/b]'
+                        halign: 'center'
+                        size_hint: 1, None
+                        height: dp(40)
+                    MDLabel:
+                        text: 'Did the water source undergo microbiological validation?'
+                        size_hint: 1, None
+                        height: dp(40)
+                    Spinner:
+                        id: spinner_validation
+                        size_hint: 1, None
+                        height: dp(40)
+                        sync_height: True
+                        text: 'Yes/No'
+                        background_normal: ''
+                        background_color: 33/255, 150/255, 243/155, 1
+                        values: ['Yes', 'No']
+                        on_text: root.micro_validation_change()
+                    MDBoxLayout:
+                        padding: dp(0), dp(20),  dp(0), dp(0)
+                        size_hint: 1, None
+                        height: dp(40)
+                        MDTextField
+                            id: validation_text
+                            hint_text: ''
+                            size_hint: 1, None
+                            height: dp(40)
+                            disabled: True
+                            readonly: True
+                        MDIconButton:
+                            id: validation_button
+                            icon: 'calendar'
+                            disabled: True
+                            on_release: root.mb_calendar()
+                    MDLabel:
+                        id: coli_label
+                        text: 'Did the test show absence of E. Coli?'
+                        size_hint: 1, None
+                        height: dp(40)
+                        disabled: True
+                    Spinner:
+                        id: coli_spinner
+                        size_hint: 1, None
+                        height: dp(40)
+                        sync_height: True
+                        text: 'Yes/No'
+                        background_normal: ''
+                        background_color: 33/255, 150/255, 243/155, 1
+                        values: ['Yes', 'No']
+                        disabled: True
+
+            MDBoxLayout:
+                padding: dp(10), dp(0), dp(10), dp(10),
+                spacing: dp(10)
+                size_hint: 1, .1
+                canvas.before:
+                    Color:
+                        rgba: 0/255, 119/255, 182/255, 1
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+                MDIconButton:
+                    size_hint: .5, 1
+                    icon: 'arrow-left-bold'
+                    theme_icon_color: 'Custom'
+                    icon_color: 1, 1, 1, 1
+                    on_release: root.frame_04_previous()
+                MDIconButton:
+                    size_hint: .5, 1
+                    icon: 'cancel'
+                    theme_icon_color: 'Custom'
+                    icon_color: 1, 1, 1, 1
+                    on_release: root.household_cancel()
+                MDIconButton:
+                    size_hint: .5, 1
+                    icon: 'arrow-right-bold'
+                    theme_icon_color: 'Custom'
+                    icon_color: 1, 1, 1, 1
+                    on_release: root.frame_04_next()
+    Screen:
+        name: 'frame_05'
+        MDBoxLayout:
+            orientation: 'vertical'
+            MDLabel:
+                text: 'Water Source'
+                size_hint: 1, .1
+                halign: 'center'
+                color: 1, 1, 1, 1
+                canvas.before:
+                    Color:
+                        rgba: 0/255, 119/255, 182/255, 1
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+            MDAnchorLayout:
+                size_hint: 1, .8
+                MDGridLayout:
+                    cols: 1
+                    size_hint: .8, .9
+                    spacing: dp(20)
+                    MDLabel:
+                        markup: True
+                        text: '[b]Physical-Chemical Validation (required)[/b]'
+                        halign: 'center'
+                        size_hint: 1, None
+                        height: dp(40)
+                    MDLabel:
+                        text: 'Did the water source undergo physical-chemical validation?'
+                        size_hint: 1, None
+                        height: dp(40)
+                    Spinner:
+                        id: spinner_pc_validation
+                        size_hint: 1, None
+                        height: dp(40)
+                        sync_height: True
+                        text: 'Yes/No'
+                        background_normal: ''
+                        background_color: 33/255, 150/255, 243/155, 1
+                        values: ['Yes', 'No']
+                        on_text: root.pc_validation_change()
+                    MDBoxLayout:
+                        padding: dp(0), dp(20),  dp(0), dp(0)
+                        size_hint: 1, None
+                        height: dp(40)
+                        MDTextField
+                            id: validation_pc_text
+                            hint_text: ''
+                            size_hint: 1, None
+                            height: dp(40)
+                            disabled: True
+                            readonly: True
+                        MDIconButton:
+                            id: validation_pc_button
+                            icon: 'calendar'
+                            disabled: True
+                            on_release: root.pc_calendar()
+                    MDLabel:
+                        id: pc_label
+                        text: 'Was arsenic below allowable limit?'
+                        size_hint: 1, None
+                        height: dp(40)
+                        disabled: True
+                    Spinner:
+                        id: pc_spinner
+                        size_hint: 1, None
+                        height: dp(40)
+                        sync_height: True
+                        text: 'Yes/No'
+                        background_normal: ''
+                        background_color: 33/255, 150/255, 243/155, 1
+                        values: ['Yes', 'No']
+                        disabled: True
+            MDBoxLayout:
+                padding: dp(10), dp(0), dp(10), dp(10),
+                spacing: dp(10)
+                size_hint: 1, .1
+                canvas.before:
+                    Color:
+                        rgba: 0/255, 119/255, 182/255, 1
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+                MDIconButton:
+                    size_hint: .5, 1
+                    icon: 'arrow-left-bold'
+                    theme_icon_color: 'Custom'
+                    icon_color: 1, 1, 1, 1
+                    on_release: root.frame_05_previous()
+                MDIconButton:
+                    size_hint: .5, 1
+                    icon: 'cancel'
+                    theme_icon_color: 'Custom'
+                    icon_color: 1, 1, 1, 1
+                    on_release: root.household_cancel()
+                MDIconButton:
+                    size_hint: .5, 1
+                    icon: 'arrow-right-bold'
+                    theme_icon_color: 'Custom'
+                    icon_color: 1, 1, 1, 1
+                    on_release: root.frame_05_next()
+    Screen:
+        name: 'frame_06'
+        MDBoxLayout:
+            orientation: 'vertical'
+            MDLabel:
+                text: 'Sanitation Facility'
+                size_hint: 1, .1
+                halign: 'center'
+                color: 1, 1, 1, 1
+                canvas.before:
+                    Color:
+                        rgba: 0/255, 119/255, 182/255, 1
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+            MDAnchorLayout:
+                size_hint: 1, .8
+                MDGridLayout:
+                    spacing: dp(20)
+                    cols: 1
+                    size_hint: .8, .9
+                    MDLabel:
+                        markup: True
+                        text: '[b]Open defecation[/b]'
+                        halign: 'center'
+                        size_hint: 1, None
+                        height: dp(40)
+                    MDLabel:
+                        text: 'Does the household practice defecating outside a CR or throw human waste outside including baby diapers?'
+                        size_hint: 1, None
+                        height: dp(80)
+                    Spinner:
+                        id: open_defecation
+                        size_hint: 1, None
+                        height: dp(40)
+                        sync_height: True
+                        text: 'Yes/No'
+                        background_normal: ''
+                        background_color: 33/255, 150/255, 243/155, 1
+                        values: ['Yes', 'No']
+            MDBoxLayout:
+                padding: dp(10), dp(0), dp(10), dp(10),
+                spacing: dp(10)
+                size_hint: 1, .1
+                canvas.before:
+                    Color:
+                        rgba: 0/255, 119/255, 182/255, 1
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+                MDIconButton:
+                    size_hint: .5, 1
+                    icon: 'arrow-left-bold'
+                    theme_icon_color: 'Custom'
+                    icon_color: 1, 1, 1, 1
+                    on_release: root.frame_06_previous()
+                MDIconButton:
+                    size_hint: .5, 1
+                    icon: 'cancel'
+                    theme_icon_color: 'Custom'
+                    icon_color: 1, 1, 1, 1
+                    on_release: root.household_cancel()
+                MDIconButton:
+                    size_hint: .5, 1
+                    icon: 'arrow-right-bold'
+                    theme_icon_color: 'Custom'
+                    icon_color: 1, 1, 1, 1
+                    on_release: root.frame_06_next()
+    Screen:
+        name: 'frame_07'
+        MDBoxLayout:
+            orientation: 'vertical'
+            MDLabel:
+                text: 'Sanitation Facility'
+                size_hint: 1, .1
+                halign: 'center'
+                color: 1, 1, 1, 1
+                canvas.before:
+                    Color:
+                        rgba: 0/255, 119/255, 182/255, 1
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+            MDScrollView:
+                size_hint: 1, .8
+                MDGridLayout:
+                    size_hint: 1, None
+                    height: self.minimum_height
+                    cols: 1
+                    padding: dp(20), dp(10), dp(20), dp(10)
+                    spacing: dp(10)
+                    MDLabel:
+                        size_hint: 1, None
+                        height: dp(40)
+                        halign: 'center'
+                        markup: True
+                        text: '[b]Type of Sanitation facility (required)[/b]'
+                    MDLabel:
+                        size_hint: 1, None
+                        height: dp(40)
+                        halign: 'center'
+                        markup: True
+                        text: '[b]Sanitary toilet facilities:[/b]'
+                    MDBoxLayout:
+                        size_hint: 1, None
+                        height: dp(40)
+                        MDCheckbox:
+                            id: septic_tank
+                            size_hint: None, 1
+                            width: self.height
+                            group: 'toilets'
+                        MDLabel:
+                            text: 'Pour/flush connected to septic tank'
+                    MDBoxLayout:
+                        size_hint: 1, None
+                        height: dp(40)
+                        MDCheckbox:
+                            id: sewerage
+                            size_hint: None, 1
+                            width: self.height
+                            group: 'toilets'
+                        MDLabel:
+                            text: 'Pour/flush connected to septic tank and to sewerage system'
+                    MDBoxLayout:
+                        size_hint: 1, None
+                        height: dp(40)
+                        MDCheckbox:
+                            id: ventilated
+                            size_hint: None, 1
+                            width: self.height
+                            group: 'toilets'
+                        MDLabel:
+                            text: 'Ventilated pit latrine or composting toilet'
+                    MDBoxLayout:
+                        size_hint: 1, None
+                        height: dp(40)
+                        MDCheckbox:
+                            id: improvised
+                            size_hint: None, 1
+                            width: self.height
+                            group: 'toilets'
+                        MDLabel:
+                            text: 'Water sealed toilet with improvised containment'
+                    MDLabel:
+                        size_hint: 1, None
+                        height: dp(40)
+                        halign: 'center'
+                        markup: True
+                        text: '[b]Unsanitary toilet facilities:[/b]'
+                    MDBoxLayout:
+                        size_hint: 1, None
+                        height: dp(40)
+                        MDCheckbox:
+                            id: drainage
+                            size_hint: None, 1
+                            width: self.height
+                            group: 'toilets'
+                        MDLabel:
+                            text: 'Water sealed connected to open drain'
+                    MDBoxLayout:
+                        size_hint: 1, None
+                        height: dp(40)
+                        MDCheckbox:
+                            id: overhung
+                            size_hint: None, 1
+                            width: self.height
+                            group: 'toilets'
+                        MDLabel:
+                            text: 'Overhung latrine'
+                    MDBoxLayout:
+                        size_hint: 1, None
+                        height: dp(40)
+                        MDCheckbox:
+                            id: open_pit
+                            size_hint: None, 1
+                            width: self.height
+                            group: 'toilets'
+                        MDLabel:
+                            text: 'Open pit latrine'
+                    MDBoxLayout:
+                        size_hint: 1, None
+                        height: dp(40)
+                        MDCheckbox:
+                            id: without
+                            size_hint: None, 1
+                            width: self.height
+                            group: 'toilets'
+                        MDLabel:
+                            text: 'Without toilet'
+            MDBoxLayout:
+                padding: dp(10), dp(0), dp(10), dp(10),
+                spacing: dp(10)
+                size_hint: 1, .1
+                canvas.before:
+                    Color:
+                        rgba: 0/255, 119/255, 182/255, 1
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+                MDIconButton:
+                    size_hint: .5, 1
+                    icon: 'arrow-left-bold'
+                    theme_icon_color: 'Custom'
+                    icon_color: 1, 1, 1, 1
+                    on_release: root.frame_07_previous()
+                MDIconButton:
+                    size_hint: .5, 1
+                    icon: 'cancel'
+                    theme_icon_color: 'Custom'
+                    icon_color: 1, 1, 1, 1
+                    on_release: root.household_cancel()
+                MDIconButton:
+                    size_hint: .5, 1
+                    icon: 'arrow-right-bold'
+                    theme_icon_color: 'Custom'
+                    icon_color: 1, 1, 1, 1
+                    on_release: root.frame_07_next()
+    Screen:
+        name: 'frame_08'
+        MDBoxLayout:
+            orientation: 'vertical'
+            MDLabel:
+                text: 'Sanitation Facility'
+                size_hint: 1, .1
+                halign: 'center'
+                color: 1, 1, 1, 1
+                canvas.before:
+                    Color:
+                        rgba: 0/255, 119/255, 182/255, 1
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+            MDAnchorLayout:
+                size_hint: 1, .8
+                MDGridLayout:
+                    cols: 1
+                    size_hint: .8, .9
+                    MDLabel:
+                        markup: True
+                        text: '[b]Toilet not shared[/b]'
+                        halign: 'center'
+                        size_hint: 1, None
+                        height: dp(40)
+                    MDLabel:
+                        text: 'Toilet is not shared?'
+                        size_hint: 1, None
+                        height: dp(80)
+                    Spinner:
+                        id: toilet_not_shared
+                        size_hint: 1, None
+                        height: dp(40)
+                        sync_height: True
+                        text: 'Yes/No'
+                        background_normal: ''
+                        background_color: 33/255, 150/255, 243/155, 1
+                        values: ['Yes', 'No']
+            MDBoxLayout:
+                padding: dp(10), dp(0), dp(10), dp(10),
+                spacing: dp(10)
+                size_hint: 1, .1
+                canvas.before:
+                    Color:
+                        rgba: 0/255, 119/255, 182/255, 1
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+                MDIconButton:
+                    size_hint: .5, 1
+                    icon: 'arrow-left-bold'
+                    theme_icon_color: 'Custom'
+                    icon_color: 1, 1, 1, 1
+                    on_release: root.frame_08_previous()
+                MDIconButton:
+                    size_hint: .5, 1
+                    icon: 'cancel'
+                    theme_icon_color: 'Custom'
+                    icon_color: 1, 1, 1, 1
+                    on_release: root.household_cancel()
+                MDIconButton:
+                    size_hint: .5, 1
+                    icon: 'arrow-right-bold'
+                    theme_icon_color: 'Custom'
+                    icon_color: 1, 1, 1, 1
+                    on_release: root.frame_08_next()
+    Screen:
+        name: 'frame_09'
+        MDBoxLayout:
+            orientation: 'vertical'
+            MDLabel:
+                text: 'Sanitation Facility'
+                size_hint: 1, .1
+                halign: 'center'
+                color: 1, 1, 1, 1
+                canvas.before:
+                    Color:
+                        rgba: 0/255, 119/255, 182/255, 1
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+            MDAnchorLayout:
+                size_hint: 1, .8
+                MDGridLayout:
+                    cols: 1
+                    size_hint: .8, .9
+                    spacing: dp(40)
+                    MDLabel:
+                        markup: True
+                        text: '[b]Disposal/Treatment of excreta[/b]'
+                        halign: 'center'
+                        size_hint: 1, None
+                        height: dp(40)
+                    MDBoxLayout:
+                        size_hint: 1, None
+                        height: dp(60)
+                        MDCheckbox:
+                            id: in_situ
+                            size_hint: None, 1
+                            width: self.height
+                            group: 'disposal'
+                        MDLabel:
+                            text: 'Sewage/excreta is safely disposed in situ (septic tank)'
+                    MDBoxLayout:
+                        size_hint: 1, None
+                        height: dp(60)
+                        MDCheckbox:
+                            id: collected
+                            size_hint: None, 1
+                            width: self.height
+                            group: 'disposal'
+                        MDLabel:
+                            text: 'Sewage/excreta is collected, transported, treated and disposed (collected)'
+            MDBoxLayout:
+                padding: dp(10), dp(0), dp(10), dp(10),
+                spacing: dp(10)
+                size_hint: 1, .1
+                canvas.before:
+                    Color:
+                        rgba: 0/255, 119/255, 182/255, 1
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+                MDIconButton:
+                    size_hint: .5, 1
+                    icon: 'arrow-left-bold'
+                    theme_icon_color: 'Custom'
+                    icon_color: 1, 1, 1, 1
+                    on_release: root.frame_09_previous()
+                MDIconButton:
+                    size_hint: .5, 1
+                    icon: 'cancel'
+                    theme_icon_color: 'Custom'
+                    icon_color: 1, 1, 1, 1
+                    on_release: root.household_cancel()
+                MDIconButton:
+                    size_hint: .5, 1
+                    icon: 'arrow-right-bold'
+                    theme_icon_color: 'Custom'
+                    icon_color: 1, 1, 1, 1
+                    on_release: root.frame_09_next()
+    Screen:
+        name: 'frame_10'
+        MDBoxLayout:
+            orientation: 'vertical'
+            MDLabel:
+                text: 'Solid Waste'
+                size_hint: 1, .1
+                halign: 'center'
+                color: 1, 1, 1, 1
+                canvas.before:
+                    Color:
+                        rgba: 0/255, 119/255, 182/255, 1
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+            MDGridLayout:
+                size_hint: 1, .8
+                cols: 1
+                padding: dp(20)
+                spacing: dp(20)
+                MDLabel:
+                    size_hint: 1, None
+                    height: dp(40)
+                    text: 'Solid waste management practiced in the household'
+                MDBoxLayout:
+                    size_hint: 1, None
+                    height: dp(40)
+                    MDCheckbox:
+                        id: segregation
+                        size_hint: None, 1
+                        width: self.height
+                    MDLabel:
+                        text: 'Waste segregation'
+                MDBoxLayout:
+                    size_hint: 1, None
+                    height: dp(40)
+                    MDCheckbox:
+                        id: composting
+                        size_hint: None, 1
+                        width: self.height
+                    MDLabel:
+                        text: 'Backyard composting'
+                MDBoxLayout:
+                    size_hint: 1, None
+                    height: dp(40)
+                    MDCheckbox:
+                        id: recycling
+                        size_hint: None, 1
+                        width: self.height
+                    MDLabel:
+                        text: 'Recycling/reuse'
+                MDBoxLayout:
+                    size_hint: 1, None
+                    height: dp(40)
+                    MDCheckbox:
+                        id: collected_by_truck
+                        size_hint: None, 1
+                        width: self.height
+                    MDLabel:
+                        text: 'Collected by municipal collection and disposal system'
+                MDBoxLayout:
+                    size_hint: 1, None
+                    height: dp(40)
+                    MDCheckbox:
+                        id: others
+                        size_hint: None, 1
+                        width: self.height
+                        on_active: root.others_active()
+                    MDLabel:
+                        text: 'Others'
+                MDTextField:
+                    id: others_practice
+                    hint_text: ''
+                    disabled: True
+            MDBoxLayout:
+                padding: dp(10), dp(0), dp(10), dp(10),
+                spacing: dp(10)
+                size_hint: 1, .1
+                canvas.before:
+                    Color:
+                        rgba: 0/255, 119/255, 182/255, 1
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+                MDIconButton:
+                    size_hint: .5, 1
+                    icon: 'arrow-left-bold'
+                    theme_icon_color: 'Custom'
+                    icon_color: 1, 1, 1, 1
+                    on_release: root.frame_10_previous()
+                MDIconButton:
+                    size_hint: .5, 1
+                    icon: 'cancel'
+                    theme_icon_color: 'Custom'
+                    icon_color: 1, 1, 1, 1
+                    on_release: root.household_cancel()
+                MDIconButton:
+                    size_hint: .5, 1
+                    icon: 'arrow-right-bold'
+                    theme_icon_color: 'Custom'
+                    icon_color: 1, 1, 1, 1
+                    on_release: root.frame_10_next()
+    Screen:
+        name: 'screen_household_details'
+        MDBoxLayout:
+            orientation: 'vertical'
+            MDLabel:
+                text: 'Household Details'
+                size_hint: 1, .1
+                halign: 'center'
+                color: 1, 1, 1, 1
+                canvas.before:
+                    Color:
+                        rgba: 0/255, 119/255, 182/255, 1
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+            MDScrollView:
+                size_hint: 1, .8
+                MDGridLayout:
+                    size_hint: 1, None
+                    height: self.minimum_height
+                    cols: 1
+                    padding: dp(20)
+                    spacing: dp(20)
+
+                    MDLabel:
+                        id: detail_interviewer
+                        size_hint: 1, None
+                        height: dp(20)
+                    MDLabel:
+                        id: detail_barangay
+                        size_hint: 1, None
+                        height: dp(20)
+                    MDLabel:
+                        id: detail_purok
+                        size_hint: 1, None
+                        height: dp(20)
+                    MDLabel:
+                        id: detail_name
+                        size_hint: 1, None
+                        height: dp(20)
+                    MDLabel:
+                        id: detail_level_1
+                        size_hint: 1, None
+                        height: dp(20)
+                    MDLabel:
+                        id: detail_level_2
+                        size_hint: 1, None
+                        height: dp(20)
+                    MDLabel:
+                        id: detail_level_3
+                        size_hint: 1, None
+                        height: dp(20)
+                    MDLabel:
+                        id: detail_other_water
+                        size_hint: 1, None
+                        height: dp(20)
+                    MDLabel:
+                        id: detail_other_water_dx
+                        size_hint: 1, None
+                        height: dp(20)
+                    MDLabel:
+                        id: detail_water_location
+                        size_hint: 1, None
+                        height: dp(20)
+                    MDLabel:
+                        id: detail_water_availability
+                        size_hint: 1, None
+                        height: dp(20)
+                    MDLabel:
+                        id: detail_micro_test
+                        size_hint: 1, None
+                        height: dp(20)
+                    MDLabel:
+                        id: detail_micro_test_date
+                        size_hint: 1, None
+                        height: dp(20)
+                    MDLabel:
+                        id: detail_micro_test_result
+                        size_hint: 1, None
+                        height: dp(20)
+                    MDLabel:
+                        id: detail_physical_chemical_test
+                        size_hint: 1, None
+                        height: dp(20)
+                    MDLabel:
+                        id: detail_physical_chemical_test_date
+                        size_hint: 1, None
+                        height: dp(20)
+                    MDLabel:
+                        id: detail_physical_chemical_test_result
+                        size_hint: 1, None
+                        height: dp(20)
+                    MDLabel:
+                        id: detail_open_defecation
+                        size_hint: 1, None
+                        height: dp(20)
+                    MDLabel:
+                        id: detail_septic
+                        size_hint: 1, None
+                        height: dp(20)
+                    MDLabel:
+                        id: detail_sewerage
+                        size_hint: 1, None
+                        height: dp(20)
+                    MDLabel:
+                        id: detail_ventilated
+                        size_hint: 1, None
+                        height: dp(20)
+                    MDLabel:
+                        id: detail_improvised
+                        size_hint: 1, None
+                        height: dp(20)
+                    MDLabel:
+                        id: detail_drainage
+                        size_hint: 1, None
+                        height: dp(20)
+                    MDLabel:
+                        id: detail_overhung
+                        size_hint: 1, None
+                        height: dp(20)
+                    MDLabel:
+                        id: detail_open_pit
+                        size_hint: 1, None
+                        height: dp(20)
+                    MDLabel:
+                        id: detail_without
+                        size_hint: 1, None
+                        height: dp(20)
+                    MDLabel:
+                        id: detail_toilet_not_shared
+                        size_hint: 1, None
+                        height: dp(20)
+                    MDLabel:
+                        id: detail_in_situ
+                        size_hint: 1, None
+                        height: dp(20)
+                    MDLabel:
+                        id: detail_collected
+                        size_hint: 1, None
+                        height: dp(20)
+                    MDLabel:
+                        id: detail_segregation
+                        size_hint: 1, None
+                        height: dp(20)
+                    MDLabel:
+                        id: detail_composting
+                        size_hint: 1, None
+                        height: dp(20)
+                    MDLabel:
+                        id: detail_recycling
+                        size_hint: 1, None
+                        height: dp(20)
+                    MDLabel:
+                        id: detail_collected_by_truck
+                        size_hint: 1, None
+                        height: dp(20)
+                    MDLabel:
+                        id: detail_other_waste_mgt
+                        size_hint: 1, None
+                        height: dp(20)
+                    MDLabel:
+                        id: detail_other_waste_mgt_dx
+                        size_hint: 1, None
+                        height: dp(20)
+                    MDLabel:
+                        id: detail_basic_water_access
+                        size_hint: 1, None
+                        height: dp(20)
+                    MDLabel:
+                        id: detail_safely_managed_water
+                        size_hint: 1, None
+                        height: dp(20)
+                    MDLabel:
+                        id: detail_sanitary_toilet_access
+                        size_hint: 1, None
+                        height: dp(20)
+                    MDLabel:
+                        id: detail_basic_sanitation_facility
+                        size_hint: 1, None
+                        height: dp(20)
+                    MDLabel:
+                        id: detail_safely_managed_sanitation_facility
+                        size_hint: 1, None
+                        height: dp(20)
+                    MDLabel:
+                        id: detail_satisfactory_solid_waste_mgt
+                        size_hint: 1, None
+                        height: dp(20)
+                    MDLabel:
+                        id: detail_complete
+                        size_hint: 1, None
+                        height: dp(20)
+            MDBoxLayout:
+                padding: dp(10), dp(0), dp(10), dp(10),
+                spacing: dp(10)
+                size_hint: 1, .1
+                canvas.before:
+                    Color:
+                        rgba: 0/255, 119/255, 182/255, 1
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+                MDIconButton:
+                    size_hint: .5, 1
+                    icon: 'arrow-left-bold'
+                    theme_icon_color: 'Custom'
+                    icon_color: 1, 1, 1, 1
+                    on_release: root.frame_08_previous()
+                MDIconButton:
+                    size_hint: .5, 1
+                    icon: 'cancel'
+                    theme_icon_color: 'Custom'
+                    icon_color: 1, 1, 1, 1
+                    on_release: root.household_cancel()
+                MDIconButton:
+                    size_hint: .5, 1
+                    icon: 'arrow-right-bold'
+                    theme_icon_color: 'Custom'
+                    icon_color: 1, 1, 1, 1
+                    on_release: root.frame_08_next()
+    Screen:
+        name: 'frame_template'
+        MDBoxLayout:
+            orientation: 'vertical'
+            MDLabel:
+                text: 'Water Source'
+                size_hint: 1, .1
+                halign: 'center'
+                color: 1, 1, 1, 1
+                canvas.before:
+                    Color:
+                        rgba: 0/255, 119/255, 182/255, 1
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+            MDBoxLayout:
+                padding: dp(10), dp(0), dp(10), dp(10),
+                spacing: dp(10)
+                size_hint: 1, .1
+                canvas.before:
+                    Color:
+                        rgba: 0/255, 119/255, 182/255, 1
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+                MDIconButton:
+                    size_hint: .5, 1
+                    icon: 'arrow-left-bold'
+                    theme_icon_color: 'Custom'
+                    icon_color: 1, 1, 1, 1
+                    on_release: root.frame_08_previous()
+                MDIconButton:
+                    size_hint: .5, 1
+                    icon: 'cancel'
+                    theme_icon_color: 'Custom'
+                    icon_color: 1, 1, 1, 1
+                    on_release: root.household_cancel()
+                MDIconButton:
+                    size_hint: .5, 1
+                    icon: 'arrow-right-bold'
+                    theme_icon_color: 'Custom'
+                    icon_color: 1, 1, 1, 1
+                    on_release: root.frame_08_next()
+
+<MissingUserInfo>:
+    markup: True
+    text: '[color=#12588b]Some information are missing. Questions marked as required requires an answer. Please review your answers.[/color]'
+
+<MismatchPW>:
+    markup: True
+    text: '[color=#12588b]Passwords entered do not match. Please review your answers.[/color]'
+
+<UserAlreadyExist>:
+    markup: True
+    text: '[color=#12588b]A user of similar name already exist in the database. Please review your answers.[/color]'
+
+<NewUserSaved>:
+    markup: True
+    text: '[color=#12588b]New user successfully saved.[/color]'
+
+<NoUser>:
+    markup: True
+    text: '[color=#12588b]No user is selected. Select user to continue.[/color]'
+
+<WrongPW>:
+    markup: True
+    text: '[color=#12588b]You have entered a wrong password. Please review your answers..[/color]'
+
+<HouseholdAlreadyExist>:
+    markup: True
+    text: '[color=#12588b]A household of similar name already exist in the database. Please review your answers.[/color]'
+
+
